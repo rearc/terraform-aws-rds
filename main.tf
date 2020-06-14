@@ -13,7 +13,7 @@ resource "random_id" "final_snapshot_id" {
 }
 
 resource "aws_db_instance" "db" {
-  identifier = "${local.stack}-${var.app_name}"
+  identifier = replace("${local.stack}-${var.app_name}", "_", "")
   snapshot_identifier = var.snapshot_identifier
   allocated_storage = var.snapshot_identifier != "" ? null : var.allocated_storage
   storage_type         = "gp2"
